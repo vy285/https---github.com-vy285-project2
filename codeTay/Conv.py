@@ -10,23 +10,23 @@ class Convolution:
         self.stride_height = stride_height
         self.p = p
     
-    def nhan(self):
+    def hoatDong(self):
         wOld , hOld = self.inpImg.shape
         wNew = int((wOld - self.widthFilter + 2* self.p)/self.stride_width +1)
         hNew = int((hOld - self.heightFilter + 2* self.p)/self.stride_height + 1)
         
-        filter = np.random.randn(self.widthFilter, self.heightFilter)
-        print(filter)
-        outImg = np.zeros((wNew, hNew))
-        print(outImg)
-        for i in range(wNew):
-            for j in range(hNew):
-                outImg[i,j] = np.sum(self.inpImg[i:i+self.widthFilter,j:j+self.widthFilter]*filter)
-                
-        return outImg
-    
-    def allOutImg(self):
         allImg = []
         for i in range(self.soChieu):
-            allImg.append(self.nhan())
-        return allImg
+            outImg = np.zeros((wNew, hNew))
+            filter = np.random.randn(self.widthFilter, self.heightFilter)
+            print(filter)
+
+            # print(outImg)
+            for i in range(wNew):
+                for j in range(hNew):
+                    outImg[i,j] = np.sum(self.inpImg[i:i+self.widthFilter,j:j+self.widthFilter]*filter)
+            allImg.append(outImg)
+                
+        return np.array(allImg)
+    
+    
